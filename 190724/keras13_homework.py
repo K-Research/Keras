@@ -32,7 +32,8 @@ model.add(Dense(1))
 model.compile(optimizer = 'adam', loss = 'mse')
 model.fit(x, y, epochs = 1000)
 
-x_input = array([11, 12, 13])
+#####
+x_input = array([70, 80, 90])
 x_input = x_input.reshape(1, 3, 1)
 
 yhat = model.predict(x_input)
