@@ -70,21 +70,23 @@ output2_3 = Dense(3)(output2_2)
 
 model = Model(input = [input1, input2], output = [output1_3, output2_3])
 
-# model.summary()
+model.summary()
 
 # 3. 훈련
-model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
+model.compile(loss = 'mse', optimizer = 'adam', metrics = ['accuracy'])
 model.fit([x1_train, x2_train], [y1_train, y2_train], epochs = 100, batch_size = 1, validation_data = ([x1_val, x2_val], [y1_val, y2_val]))
 
 # 4. 평가 예측
 _, _, _, acc1, acc2 = model.evaluate([x1_test, x2_test], [y1_test, y2_test], batch_size = 3)
 
-print("acc1 : ", acc1)
-print("acc2 : ", acc2)
+# print(model.metrics_names)
+
+print("accuracy of x1 : ", acc1)
+print("accuracy of x2 : ", acc2)
 
 
-# y_predict = model.predict([x1_test, x2_test])
-# print(y_predict)
+y_predict = model.predict([x1_test, x2_test])
+print(y_predict)
 
 # # RMSE 구하기
 # from sklearn.metrics import mean_squared_error
