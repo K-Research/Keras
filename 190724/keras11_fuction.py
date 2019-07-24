@@ -24,27 +24,27 @@ model = Model(input = input, output = dense1)
 
 model.summary()
 
-# # 3. 훈련
-# model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
-# model.fit(x_train, y_train, epochs = 100, batch_size = 1, validation_data = (x_val, y_val))
+# 3. 훈련
+model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
+model.fit(x_train, y_train, epochs = 100, batch_size = 1, validation_data = (x_val, y_val))
 
-# # 4. 평가 예측
-# loss, acc = model.evaluate(x_test, y_test, batch_size = 3)
-# print("acc : ", acc)
+# 4. 평가 예측
+loss, acc = model.evaluate(x_test, y_test, batch_size = 3)
+print("acc : ", acc)
 
-# y_predict = model.predict(x_test)
-# print(y_predict)
+y_predict = model.predict(x_test)
+print(y_predict)
 
-# # RMSE 구하기
-# from sklearn.metrics import mean_squared_error
+# RMSE 구하기
+from sklearn.metrics import mean_squared_error
 
-# def RMSE(y_test, y_predict):
-#     return np.sqrt(mean_squared_error(y_test, y_predict))
+def RMSE(y_test, y_predict):
+    return np.sqrt(mean_squared_error(y_test, y_predict))
 
-# print("RMSE : ", RMSE(y_test, y_predict))
+print("RMSE : ", RMSE(y_test, y_predict))
 
-# # R2 구하기
-# from sklearn.metrics import r2_score
+# R2 구하기
+from sklearn.metrics import r2_score
 
-# r2_y_predict = r2_score(y_test, y_predict)
-# print("R2 : ", r2_y_predict)
+r2_y_predict = r2_score(y_test, y_predict)
+print("R2 : ", r2_y_predict)
