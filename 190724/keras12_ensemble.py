@@ -101,4 +101,4 @@ from sklearn.metrics import r2_score
 r2_y_predict1 = r2_score(y1_test, y1_predict)
 print("R2 of 1 : ", r2_y_predict1)
 r2_y_predict2 = r2_score(y2_test, y2_predict)
-print("R2 of 2: ", r2_y_predict2)
+print("R2 of 2 : ", r2_y_predict2)
