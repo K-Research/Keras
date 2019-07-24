@@ -70,7 +70,7 @@ output2_3 = Dense(3)(output2_2)
 
 model = Model(input = [input1, input2], output = [output1_3, output2_3])
 
-model.summary()
+# model.summary()
 
 # 3. 훈련
 model.compile(loss = 'mse', optimizer = 'adam', metrics = ['accuracy'])
@@ -80,21 +80,24 @@ model.fit([x1_train, x2_train], [y1_train, y2_train], epochs = 100, batch_size =
 acc = model.evaluate([x1_test, x2_test], [y1_test, y2_test], batch_size = 3)
 
 print(model.metrics_names)
-print("accuracy : ", acc)
+print("loss, loss of 1, loss of 2, accuracy of 1, accuracy of 2 : ", acc)
 
 y1_predict, y2_predict = model.predict([x1_test, x2_test])
 print(y1_predict, y2_predict)
 
-# # RMSE 구하기
-# from sklearn.metrics import mean_squared_error
+# RMSE 구하기
+from sklearn.metrics import mean_squared_error
 
-# def RMSE(y_test, y_predict):
-#     return np.sqrt(mean_squared_error(y_test, y_predict))
+def RMSE(y_test, y_predict):
+    return np.sqrt(mean_squared_error(y_test, y_predict))
 
-# print("RMSE : ", RMSE(y_test, y_predict))
+print("RMSE of 1 : ", RMSE(y1_test, y1_predict))
+print("RMSE of 2 : ", RMSE(y2_test, y2_predict))
 
-# # R2 구하기
-# from sklearn.metrics import r2_score
+# R2 구하기
+from sklearn.metrics import r2_score
 
-# r2_y_predict = r2_score(y_test, y_predict)
-# print("R2 : ", r2_y_predict)
+r2_y_predict1 = r2_score(y1_test, y1_predict)
+print("R2 of 1 : ", r2_y_predict1)
+r2_y_predict2 = r2_score(y2_test, y2_predict)
+print("R2 of 2: ", r2_y_predict2)
