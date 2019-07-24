@@ -11,10 +11,10 @@ y1 = np.transpose(y1)
 x2 = np.transpose(x2)
 y2 = np.transpose(y2)
 
-print(x1.shape)
-print(y1.shape)
-print(x2.shape)
-print(y2.shape)
+# print(x1.shape)
+# print(y1.shape)
+# print(x2.shape)
+# print(y2.shape)
 
 from sklearn.model_selection import train_test_split
 
@@ -23,20 +23,19 @@ x1_val, x1_test, y1_val, y_1test = train_test_split(x1_test, y1_test, random_sta
 x2_train, x2_test, y2_train, y2_test = train_test_split(x2, y2, random_state = 66, test_size = 0.4)
 x2_val, x2_test, y2_val, y2_test = train_test_split(x2_test, y2_test, random_state = 66, test_size = 0.5)
 
-print(x1_train)
-print(x1_val)
-print(x1_test)
-print(y1_train)
-print(y1_val)
-print(y1_test)
-print(x2_train)
-print(x2_val)
-print(x2_test)
-print(y2_train)
-print(y2_val)
-print(y2_test)
+# print(x1_train.shape)
+# print(x1_val.shape)
+# print(x1_test.shape)
+# print(y1_train.shape)
+# print(y1_val.shape)
+# print(y1_test.shape)
+# print(x2_train.shape)
+# print(x2_val.shape)
+# print(x2_test.shape)
+# print(y2_train.shape)
+# print(y2_val.shape)
+# print(y2_test.shape)
 
-'''
 # 2. 모델구성
 from keras.models import Sequential
 from keras.layers import Dense
@@ -71,4 +70,3 @@ from sklearn.metrics import r2_score
 
 r2_y_predict = r2_score(y_test, y_predict)
 print("R2 : ", r2_y_predict)
-'''
