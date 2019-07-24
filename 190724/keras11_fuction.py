@@ -1,9 +1,6 @@
 # 1. 데이터
 import numpy as np
 
-# x = np.array(range(1, 101))
-# y = np.array(range(1, 101))
-
 x = np.array([range(100), range(311, 411), range(100)])
 y = np.array([range(501, 601), range(711, 811), range(100)])
 
