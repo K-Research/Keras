@@ -9,7 +9,7 @@ y = array([4, 5, 6, 7])
 print("x.shape : ", x.shape)
 print("y.shape : ", y.shape)
 
-X = x.reshape((x.shape[0], x.shape[1], 1))
+x = x.reshape(x.shape[0], x.shape[1], 1) # (4, 3, 1)  
 print("x.shape : ", x.shape)
 
 # 2. 모델 구성
@@ -17,3 +17,15 @@ model = Sequential()
 model.add(LSTM(10, activation = 'relu', input_shape = (3, 1)))
 model.add(Dense(5))
 model.add(Dense(1))
+
+# model.summary()
+
+# 3. 훈련
+model.compile(optimizer = 'adam', loss = 'mse')
+model.fit(x, y, epochs = 100)
+
+x_input = array([6, 7, 8])
+x_input = x_input.reshape(1, 3, 1)
+
+yhat = model.predict(x_input)
+print(yhat)
