@@ -12,6 +12,7 @@ y = np.array(range(1, 101))
 # y_test = x[80 : 100]
 
 from sklearn.model_selection import train_test_split
+
 x_train, x_test, y_train, y_test = train_test_split(x, y, random_state = 66, test_size = 0.2)
 x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, random_state = 66, test_size = 0.25)
 

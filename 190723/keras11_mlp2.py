@@ -21,6 +21,7 @@ print(x.shape)
 print(y.shape)
 
 from sklearn.model_selection import train_test_split  # 함수를 test_size = 0.4로 train = 0.6 , test = 0.4 로 나눈다
+
 x_train, x_test, y_train, y_test = train_test_split(x, y, random_state = 66, test_size = 0.4) # 함수를 test_size=0.4로 train =0.6 , test = 0.2 val = 0.2 로 나눈다
 x_val, x_test, y_val, y_test = train_test_split(x_test, y_test, random_state = 66, test_size = 0.5)
 print(x_test.shape)
