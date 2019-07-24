@@ -16,8 +16,8 @@ from keras.models import Sequential
 from keras.layers import Dense  
 model = Sequential()
 
-model.add(Dense(10000, input_shape = (3, ), activation = 'relu'))
-model.add(Dense(10000))
+model.add(Dense(1000, input_shape = (3, ), activation = 'relu'))
+model.add(Dense(1000))
 model.add(Dense(1000))
 model.add(Dense(1))
 
