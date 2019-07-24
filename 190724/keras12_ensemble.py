@@ -79,7 +79,8 @@ model.fit([x1_train, x2_train], [y1_train, y2_train], epochs = 100, batch_size =
 # 4. 평가 예측
 acc = model.evaluate([x1_test, x2_test], [y1_test, y2_test], batch_size = 3)
 
-print(model.metrics_names)
+# print(model.metrics_names)
+
 print("loss, loss of 1, loss of 2, accuracy of 1, accuracy of 2 : ", acc)
 
 y1_predict, y2_predict = model.predict([x1_test, x2_test])
