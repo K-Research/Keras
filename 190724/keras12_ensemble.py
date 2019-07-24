@@ -38,13 +38,23 @@ x2_val, x2_test, y2_val, y2_test = train_test_split(x2_test, y2_test, random_sta
 
 # 2. 모델구성
 from keras.models import Sequential
-from keras.layers import Dense
-model = Sequential()
+from keras.layers import Dense, Input
 
-model.add(Dense(5, input_dim = 3, activation = 'relu'))
-model.add(Dense(3))
-model.add(Dense(4))
-model.add(Dense(1))
+# model = Sequential()
+
+# model.add(Dense(5, input_dim = 3, activation = 'relu'))
+# model.add(Dense(3))
+# model.add(Dense(4))
+# model.add(Dense(1))
+
+# 함수형
+input1 = Input(shape = (3, )) # shape : input_dim
+dense1 = Dense(100, activation = 'relu')(input1) # output : 100
+dense1_2 = Dense(30)(dense1)
+dense1_3 = Dense(7)(dense1_2)
+
+input2 = Input(shape = (3, ))
+dense2 = Dense(50, actiovation = 'relu')(input2)
 
 # 3. 훈련
 model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
