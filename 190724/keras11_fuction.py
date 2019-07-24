@@ -27,7 +27,6 @@ model = Model(input = input, output = dense1)
 
 model.summary()
 
-
 # # 3. 훈련
 # model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
 # model.fit(x_train, y_train, epochs = 100, batch_size = 1, validation_data = (x_val, y_val))
