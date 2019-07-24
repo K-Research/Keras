@@ -5,7 +5,7 @@ import numpy as np
 
 # x = np.array(range(1, 101))
 # y = np.array(range(1, 101))
-x = np.array([range(100), range(311, 411), range(401 501)]) 
+x = np.array([range(100), range(311, 411), range(401, 501)]) 
 y = np.array([range(501, 601)])
 
 # 행과 열 바꾸기 (transpose)
@@ -35,7 +35,7 @@ model = Sequential() # Sequential = 순차적인 모델
 # model.add(Dense(5, input_dim = 1, activation = 'relu'))
 model.add(Dense(10, input_shape = (3, ), activation = 'relu')) # input과 output값 변경
 model.add(Dense(100000))
-model.add(Dense(10))
+model.add(Dense(100000))
 model.add(Dense(1)) 
 
 # model.summary() # param = line 갯수 (bias가 하나의 노드)

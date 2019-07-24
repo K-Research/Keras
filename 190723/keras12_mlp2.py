@@ -6,7 +6,7 @@ import numpy as np
 # x = np.array(range(1, 101))
 # y = np.array(range(1, 101))
 x = np.array([range(100), range(311, 411), range(401, 501)]) 
-y = np.array([range(501,601)])
+y = np.array([range(501, 601)])
 
 # 행과 열 바꾸기 (transpose)
 print(x.shape)
