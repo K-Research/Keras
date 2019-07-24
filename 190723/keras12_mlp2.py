@@ -5,7 +5,7 @@ import numpy as np
 
 # x = np.array(range(1, 101))
 # y = np.array(range(1, 101))
-x = np.array([range(100), range(311,411), range(401,501)]) 
+x = np.array([range(100), range(311, 411), range(401, 501)]) 
 y = np.array([range(501,601)])
 
 # 행과 열 바꾸기 (transpose)
@@ -41,14 +41,14 @@ model.add(Dense(1))
 # model.summary() # param = line 갯수 (bias가 하나의 노드)
 
 #3. 훈련
-# model.compile(loss='mse', optimizer='adam', metrics=['accuracy']) #loss : 손실율 / optimizer : 적용함수 
-model.compile(loss='mse', optimizer='adam', metrics=['mse']) #loss : 손실율 / optimizer : 적용함수 
+# model.compile(loss = 'mse', optimizer = 'adam', metrics = ['accuracy']) #loss : 손실율 / optimizer : 적용함수 
+model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse']) #loss : 손실율 / optimizer : 적용함수 
 
-# model.fit(x, y, epochs = 100, batch_size=3) # epochs : 반복 횟수 / batch_size : 몇개씩 잘라서 할 것인가 / batch_size defalt = 32
-model.fit(x_train, y_train, epochs = 100, batch_size=1, validation_data=(x_val, y_val)) # model.fit : 훈련 / validation_data를 추가하면 훈련이 더 잘됨.
+# model.fit(x, y, epochs = 100, batch_size = 3) # epochs : 반복 횟수 / batch_size : 몇개씩 잘라서 할 것인가 / batch_size defalt = 32
+model.fit(x_train, y_train, epochs = 100, batch_size = 1, validation_data = (x_val, y_val)) # model.fit : 훈련 / validation_data를 추가하면 훈련이 더 잘됨.
 
 #4. 평가 예측
-loss, acc = model.evaluate(x_test, y_test, batch_size=1) # evaluate : 평가 [x,y 값으로]
+loss, acc = model.evaluate(x_test, y_test, batch_size = 1) # evaluate : 평가 [x,y 값으로]
 print("acc : ", acc) # acc = 분류 모델에 적용
 
 y_predict = model.predict(x_test) # predict : 예측치 확인
