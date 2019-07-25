@@ -18,7 +18,7 @@ dataset = split_5(a, size)
 print("=====================")
 
 x_train = dataset[:, 0 : 4]
-y_train = dataset[:, 4, ]
+y_train = dataset[:, 4]
 
 print(x_train.shape)
 print(y_train.shape)
