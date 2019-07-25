@@ -32,6 +32,9 @@ model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
 from keras.callbacks import EarlyStopping
 
 early_stopping = EarlyStopping(monitor = 'loss', patience = 100, mode = 'auto')
+# early_stopping = EarlyStopping(monitor = 'acc', patience = 100, mode = 'auto')
+# early_stopping = EarlyStopping(monitor = 'val_loss', patience = 100, mode = 'auto')
+# early_stopping = EarlyStopping(monitor = 'val_acc', patience = 100, mode = 'auto')
 
 model.fit(x_train, y_train, epochs = 10000, batch_size = 1, validation_data = (x_val, y_val), callbacks = [early_stopping])
 
