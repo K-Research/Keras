@@ -15,34 +15,34 @@ x = scaler.transform(x)
 print(x)
 
 
-# print("x.shape : ", x.shape)
-# print("y.shape : ", y.shape)
+print("x.shape : ", x.shape)
+print("y.shape : ", y.shape)
 
-# x = x.reshape(x.shape[0], x.shape[1], 1) # (4, 3, 1)  
-# print("x.shape : ", x.shape)
+x = x.reshape(x.shape[0], x.shape[1], 1) # (4, 3, 1)  
+print("x.shape : ", x.shape)
 
-# # 2. 모델 구성
-# model = Sequential()
-# model.add(LSTM(1024, activation = 'relu', input_shape = (3, 1)))
-# model.add(Dense(512))
-# model.add(Dense(256))
-# model.add(Dense(128))
-# model.add(Dense(64))
-# model.add(Dense(32))
-# model.add(Dense(16))
-# model.add(Dense(8))
-# model.add(Dense(4))
-# model.add(Dense(2))
-# model.add(Dense(1))
+# 2. 모델 구성
+model = Sequential()
+model.add(LSTM(1024, activation = 'relu', input_shape = (3, 1)))
+model.add(Dense(512))
+model.add(Dense(256))
+model.add(Dense(128))
+model.add(Dense(64))
+model.add(Dense(32))
+model.add(Dense(16))
+model.add(Dense(8))
+model.add(Dense(4))
+model.add(Dense(2))
+model.add(Dense(1))
 
-# # model.summary()
+# model.summary()
 
-# # 3. 훈련
-# model.compile(optimizer = 'adam', loss = 'mse')
-# model.fit(x, y, epochs = 1000)
+# 3. 훈련
+model.compile(optimizer = 'adam', loss = 'mse')
+model.fit(x, y, epochs = 1000)
 
-# x_input = array([25, 35, 45])
-# x_input = x_input.reshape(1, 3, 1)
+x_input = array([25, 35, 45])
+x_input = x_input.reshape(1, 3, 1)
 
-# yhat = model.predict(x_input)
-# print(yhat)
+yhat = model.predict(x_input)
+print(yhat)
