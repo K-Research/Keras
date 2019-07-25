@@ -33,3 +33,46 @@ y_test = np.array([15, 16, 17, 18])
 
 print(x_test.shape)
 print(y_test.shape)
+
+# 2. 모델 구성
+model = Sequential()
+
+model.add(LSTM(32, input_shape = (4, 1), return_sequences = True))
+model.add(LSTM(10, return_sequences = True))
+model.add(LSTM(10, return_sequences = True))
+model.add(LSTM(10, return_sequences = True))
+model.add(LSTM(10, return_sequences = True))
+model.add(LSTM(10, return_sequences = True))
+model.add(LSTM(10, return_sequences = True))
+model.add(LSTM(10, return_sequences = True))
+model.add(LSTM(10, return_sequences = True))
+model.add(LSTM(10))
+
+model.add(Dense(5, activation = 'relu'))
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(1))
+
+
+model.summary()
+
+# 3. 훈련
+model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
+
+from keras.callbacks import EarlyStopping
+
+early_stopping = EarlyStopping(monitor = 'loss', patience = 30, mode = 'auto')
+model.fit(x_train, y_train, epochs = 10000, batch_size = 1, verbose = 1, callbacks = [early_stopping])
+
+loss, acc = model.evaluate(x_test, y_test)
+
+y_predict = model.predict(x_test)
+
+print('loss : ', loss)
+print('acc : ', acc)
+print('y_predict(x_test) : \n', y_predict)
