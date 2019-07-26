@@ -13,16 +13,9 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state = 66, tes
 x_val, x_test, y_val, y_test = train_test_split(x_test, y_test, random_state = 66, test_size = 0.5)
 
 #2. 모델구성
-from keras.models import Sequential
-from keras.layers import Dense, BatchNormalization, Dropout
-model = Sequential()
+from keras.models import load_model
 
-from keras import regularizers
-
-model.add(Dense(10, input_shape = (3, ), activation = 'relu', kernel_regularizer = regularizers.l1(0.1)))
-# model.add(BatchNormalization)
-model.add(Dropout(0.2))
-model.add(Dense(1)) 
+model = load_model("savetest01.h5")
 
 #3. 훈련
 model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
@@ -34,10 +27,10 @@ from keras.callbacks import EarlyStopping
 
 early_stopping = EarlyStopping(monitor = 'loss', patience = 100, mode = 'auto')
 
-model.fit(x_train, y_train, epochs = 1000, batch_size = 100, validation_data = (x_val, y_val), callbacks = [early_stopping, tb_hist])
+model.fit(x_train, y_train, epochs = 10000, batch_size = 8, validation_data = (x_val, y_val), callbacks = [early_stopping, tb_hist])
 
 #4. 평가 예측
-loss, acc = model.evaluate(x_test, y_test, batch_size = 100)
+loss, acc = model.evaluate(x_test, y_test, batch_size = 8)
 print("acc : ", acc)
 
 y_predict = model.predict(x_test)

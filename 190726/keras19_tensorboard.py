@@ -22,7 +22,7 @@ from keras import regularizers
 model.add(Dense(10, input_shape = (3, ), activation = 'relu', kernel_regularizer = regularizers.l1(0.1)))
 # model.add(BatchNormalization)
 model.add(Dropout(0.2))
-model.add(Dense(1)) 
+model.add(Dense(1))
 
 #3. 훈련
 model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
