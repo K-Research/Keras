@@ -20,18 +20,21 @@ model = Sequential()
 from keras import regularizers
 
 model.add(Dense(10, input_shape = (3, ), activation = 'relu', kernel_regularizer = regularizers.l1(0.1)))
-model.add(BatchNormalization)
+# model.add(BatchNormalization)
 model.add(Dropout(0.2))
 model.add(Dense(1)) 
 
 #3. 훈련
 model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
 
+import keras
+tb_hist = keras.callbacks.TensorBoard(log_dir = './graph', histogram_freq = 0, write_graph = True, write_images = True)
+
 from keras.callbacks import EarlyStopping
 
 early_stopping = EarlyStopping(monitor = 'loss', patience = 100, mode = 'auto')
 
-model.fit(x_train, y_train, epochs = 1000, batch_size = 100, validation_data = (x_val, y_val))
+model.fit(x_train, y_train, epochs = 1000, batch_size = 100, validation_data = (x_val, y_val), callbacks = [early_stopping, tb_hist])
 
 #4. 평가 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size = 100)
