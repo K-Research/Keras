@@ -14,7 +14,7 @@ x_val, x_test, y_val, y_test = train_test_split(x_test, y_test, random_state = 6
 
 #2. 모델구성
 from keras.models import Sequential
-from keras.layers import Dense, BatchNormalization
+from keras.layers import Dense, BatchNormalization, Dropout
 model = Sequential()
 
 from keras import regularizers
@@ -22,6 +22,7 @@ from keras import regularizers
 model.add(Dense(1000, input_shape = (3, ), activation = 'relu', kernel_regularizer = regularizers.l1(0.1)))
 # model.add(BatchNormalization)
 model.add(Dense(1000))
+model.add(Dropout(0.2))
 model.add(Dense(1000))
 model.add(Dense(1000))
 model.add(Dense(1)) 
@@ -29,10 +30,10 @@ model.add(Dense(1))
 #3. 훈련
 model.compile(loss = 'mse', optimizer = 'adam', metrics = ['mse'])
 
-model.fit(x_train, y_train, epochs = 100, batch_size = 8, validation_data = (x_val, y_val))
+model.fit(x_train, y_train, epochs = 1000, batch_size = 100, validation_data = (x_val, y_val))
 
 #4. 평가 예측
-loss, acc = model.evaluate(x_test, y_test, batch_size = 8)
+loss, acc = model.evaluate(x_test, y_test, batch_size = 100)
 print("acc : ", acc)
 
 y_predict = model.predict(x_test)
