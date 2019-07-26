@@ -19,12 +19,16 @@ model = Sequential()
 
 from keras import regularizers
 
-model.add(Dense(1000, input_shape = (3, ), activation = 'relu', kernel_regularizer = regularizers.l1(0.1)))
-model.add(BatchNormalization)
-model.add(Dense(1000))
-model.add(Dropout(0.2))
-model.add(Dense(1000))
-model.add(Dense(1000))
+model.add(Dense(32, input_shape = (3, ), activation = 'relu', kernel_regularizer = regularizers.l1(0.1)))
+# model.add(BatchNormalization)
+# model.add(Dense(1000))
+# model.add(Dropout(0.2))
+# model.add(Dense(1000))
+# model.add(Dense(1000))
+model.add(Dense(16))
+model.add(Dense(8))
+model.add(Dense(4))
+model.add(Dense(2))
 model.add(Dense(1))
 
 #3. 훈련
@@ -34,10 +38,10 @@ from keras.callbacks import EarlyStopping
 
 early_stopping = EarlyStopping(monitor = 'loss', patience = 100, mode = 'auto')
 
-model.fit(x_train, y_train, epochs = 1000, batch_size = 100, validation_data = (x_val, y_val))
+model.fit(x_train, y_train, epochs = 100, batch_size = 1, validation_data = (x_val, y_val))
 
 #4. 평가 예측
-loss, acc = model.evaluate(x_test, y_test, batch_size = 100)
+loss, acc = model.evaluate(x_test, y_test, batch_size = 1)
 print("acc : ", acc)
 
 y_predict = model.predict(x_test)
