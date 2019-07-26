@@ -14,14 +14,16 @@ x_val, x_test, y_val, y_test = train_test_split(x_test, y_test, random_state = 6
 
 #2. 모델구성
 from keras.models import Sequential
-from keras.layers import Dense  
+from keras.layers import Dense
 model = Sequential()
 
-model.add(Dense(100, input_shape = (3, ), activation = 'relu'))
-model.add(Dense(100))
-model.add(Dense(100))
-model.add(Dense(100))
-model.add(Dense(100))
+from keras import regularizers
+
+model.add(Dense(1000, input_shape = (3, ), activation = 'relu', kernel_regularizer = regularizers.l1(0.02)))
+model.add(Dense(1000))
+model.add(Dense(1000))
+model.add(Dense(1000))
+model.add(Dense(1000))
 model.add(Dense(1)) 
 
 #3. 훈련
