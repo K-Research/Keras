@@ -14,7 +14,8 @@ print("x.shape : ", x.shape)
 
 # 2. 모델 구성
 model = Sequential()
-model.add(LSTM(10, activation = 'relu', input_shape = (3, 1)))
+model.add(LSTM(10, activation = 'relu', input_shape = (3, 1), return_sequences = True))
+model.add(LSTM(10))
 model.add(Dense(5))
 model.add(Dense(1))
 
