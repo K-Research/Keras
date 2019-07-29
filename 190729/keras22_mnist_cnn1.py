@@ -20,13 +20,15 @@ import tensorflow as tf
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
 X_train = X_train.reshape(X_train.shape[0], 28, 28, 1).astype('float32') / 255 # X_train.shape[0] : 60000
 X_test = X_test.reshape(X_test.shape[0], 28, 28, 1).astype('float32') / 255
+
+# print(Y_train.shape)
+# print(Y_test.shape)
+
 Y_train = np_utils.to_categorical(Y_train)
 Y_test = np_utils.to_categorical(Y_test)
 
 # print(X_train.shape)
 # print(X_test.shape)
-# print(Y_train.shape)
-# print(Y_test.shape)
 
 # 컨볼루션 신경망의 설정
 model = Sequential()
