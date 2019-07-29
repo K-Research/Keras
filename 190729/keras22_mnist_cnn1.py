@@ -17,7 +17,6 @@ import tensorflow as tf
 # tf.set_random_seed(seed)
 
 # 데이터 불러오기
-
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
 X_train = X_train.reshape(X_train.shape[0], 28, 28, 1).astype('float32') / 255
 X_test = X_test.reshape(X_test.shape[0], 28, 28, 1).astype('float32') / 255
