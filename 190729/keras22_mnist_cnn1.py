@@ -43,7 +43,7 @@ model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = [
 # os.mkdir(MODEL_DIR)
 
 # modelpath = "./model/{epoch:02d}-{val_loss:.4f}.hdf5"
-# chechpointer = ModelCheckpoint(filepath = modelpath, monitor = 'val_loss', verbose = 1, save_...)
+# chechpointer = ModelCheckpoint(filepath = modelpath, monitor = 'val_loss', verbose = 1, save_best_only=False, save_weights_only=False, mode='auto', period=1)
 early_stopping_callback = EarlyStopping(monitor = 'val_loss', patience = 10)
 
 # 모델의 실행
