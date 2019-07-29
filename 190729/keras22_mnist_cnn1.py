@@ -1,4 +1,4 @@
-# -*- coding : utf-8
+# -*- coding : utf-8 -*-
 
 from keras.datasets import mnist
 from keras.utils import np_utils
