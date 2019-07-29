@@ -18,16 +18,21 @@ import tensorflow as tf
 
 # 데이터 불러오기
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
-X_train = X_train.reshape(X_train.shape[0], 28, 28, 1).astype('float32') / 255
+X_train = X_train.reshape(X_train.shape[0], 28, 28, 1).astype('float32') / 255 # X_train.shape[0] : 60000
 X_test = X_test.reshape(X_test.shape[0], 28, 28, 1).astype('float32') / 255
 Y_train = np_utils.to_categorical(Y_train)
 Y_test = np_utils.to_categorical(Y_test)
+
+# print(X_train.shape)
+# print(X_test.shape)
+# print(Y_train.shape)
+# print(Y_test.shape)
 
 # 컨볼루션 신경망의 설정
 model = Sequential()
 model.add(Conv2D(32, kernel_size = (3, 3), input_shape = (28, 28, 1), activation = 'relu'))
 model.add(Conv2D(64, (3, 3), activation = 'relu'))
-model.add(MaxPooling2D(pool_size = 2))
+model.add(MaxPooling2D(pool_size = 2)) # (pool_size = 2) : (2, 2)
 model.add(Dropout(0.25))
 model.add(Flatten())
 model.add(Dense(128, activation = 'relu'))
