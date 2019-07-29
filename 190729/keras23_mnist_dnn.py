@@ -5,6 +5,13 @@ from keras.datasets import mnist
 # print(len(train_labels))
 # print(test_images.shape)
 # print(train_labels)
+# print(test_image.shape)
+# print(train_image[88].shape)
+
+# import matplotlib.pyplot as plt
+# digit = train_image[88]
+# plt.imshow(digit, cmap = plt.cm.binary)
+# plt.show()
 
 from keras import models
 from keras import layers
