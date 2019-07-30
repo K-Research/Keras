@@ -5,6 +5,7 @@ from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Conv2D, MaxPooling2D
 from keras.optimizers import SGD, Adam, RMSprop
 import matplotlib.pyplot as plt
+from keras import layers
 
 # CIFAR_10은 3채널로 구성된 32x32 이밎 60000장을 갖는다.
 IMG_CHANNELS = 3
@@ -35,52 +36,13 @@ X_test = X_test.astype('float32')
 X_train /= 255
 X_test /= 255
 
-# X_train = X_train.flatten()
-# X_test = X_test.flatten()
-# X_train = X_train.reshape(X_train.shape[0], 1)
-# X_test = X_test.reshape(X_test.shape[0], 1)
-
-# from sklearn.preprocessing import MinMaxScaler, StandardScaler
-
-# scaler = MinMaxScaler()
-# # scaler = StandardScaler()
-# scaler.fit(X_train)
-# scaler.fit(X_test)
-# X_train = scaler.transform(X_train)
-# X_test = scaler.transform(X_test)
-
-# X_train = X_train.flatten()
-# X_test = X_test.flatten()
-
-# X_train = X_train.reshape(-1, 3)
-# X_test = X_train.reshape(-1, 3)
-
-# X_train = X_train.reshape(-1, 32, 3)
-# X_test = X_train.reshape(-1, 32, 3)
-
-# X_train = X_train.reshape(-1, 32, 32, 3)
-# X_test = X_train.reshape(-1, 32, 32, 3)
-
-# print(X_train.shape)
-# print(X_test.shape)
-# print(Y_train.shape)
-# print(Y_test.shape)
+X_train = X_train.reshape(50000, IMG_ROWS * IMG_COLS *IMG_CHANNELS)
+X_test = X_test.reshape(10000, IMG_ROWS * IMG_COLS *IMG_CHANNELS)
 
 # 신경망 정의
 model = Sequential()
-model.add(Conv2D(32, (3, 3), padding = 'same', input_shape = (IMG_ROWS, IMG_COLS, IMG_CHANNELS)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size = (2, 2)))
-model.add(Dropout(0.25))
-
-model.add(Flatten())
-model.add(Dense(512))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-model.add(Dense(NB_CLASSES))
-model.add(Activation('softmax'))
-
-model.summary()
+model.add(layers.Dense(512, activation = 'relu', input_shape = (IMG_ROWS * IMG_COLS *IMG_CHANNELS, )))
+model.add(layers.Dense(10, activation = 'softmax'))
 
 # 학습
 model.compile(loss = 'categorical_crossentropy', optimizer = OPTIM, metrics = ['accuracy'])
@@ -91,11 +53,6 @@ print('Testing...')
 score = model.evaluate(X_test, Y_test, batch_size = BATCH_SIZE, verbose = VERBOSE)
 print("\nTest scroe : ", score[0])
 print('Test accuracy : ', score[1])
-
-# 모델 저장
-# model.json = model.to_json()
-# open('cifar10_architecture.json', 'w').write(model_json)
-# model.save_weights('cifar10_weights.h5', overwrite = True)
 
 # 히스토리에 있는 모든 데이터 나열
 print(history.history.keys())
