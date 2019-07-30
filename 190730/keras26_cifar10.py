@@ -6,7 +6,7 @@ from keras.layers.convolutional import Conv2D, MaxPooling2D
 from keras.optimizers import SGD, Adam, RMSprop
 import matplotlib.pyplot as plt
 
-# CIFAR_10은 3채널로 구성된 32x32 이밎 60000장을 갖는다.
+# CIFAR_10은 3채널로 구성된 32x32 이미지 60000장을 갖는다.
 IMG_CHANNELS = 3
 IMG_ROWS = 32
 IMG_COLS = 32
@@ -85,7 +85,14 @@ model.summary()
 # 학습
 model.compile(loss = 'categorical_crossentropy', optimizer = OPTIM, metrics = ['accuracy'])
 
-history = model.fit(X_train, Y_train, batch_size = BATCH_SIZE, epochs = NB_EPOCH, validation_split = VALIDATION_SPLIT, verbose = VERBOSE)
+import keras
+tb_hist = keras.callbacks.TensorBoard(log_dir = './graph', histogram_freq = 0, write_graph = True, write_images = True)
+
+from keras.callbacks import ModelCheckpoint, EarlyStopping
+
+early_stopping_callback = EarlyStopping(monitor = 'val_loss', patience = 10)
+
+history = model.fit(X_train, Y_train, batch_size = BATCH_SIZE, epochs = NB_EPOCH, validation_split = VALIDATION_SPLIT, verbose = VERBOSE, callbacks = [early_stopping_callback, tb_hist])
 
 print('Testing...')
 score = model.evaluate(X_test, Y_test, batch_size = BATCH_SIZE, verbose = VERBOSE)

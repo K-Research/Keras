@@ -7,7 +7,7 @@ from keras.optimizers import SGD, Adam, RMSprop
 import matplotlib.pyplot as plt
 from keras import layers
 
-# CIFAR_10은 3채널로 구성된 32x32 이밎 60000장을 갖는다.
+# CIFAR_10은 3채널로 구성된 32x32 이미지 60000장을 갖는다.
 IMG_CHANNELS = 3
 IMG_ROWS = 32
 IMG_COLS = 32
