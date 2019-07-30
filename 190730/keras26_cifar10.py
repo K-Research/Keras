@@ -17,6 +17,7 @@ NB_EPOCH = 20
 NB_CLASSES = 10
 VERBOSE = 1
 VALIDATION_SPLIT = 0.2
+OPTIM = RMSprop()
 
 # 데이터셋 불러오기
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
