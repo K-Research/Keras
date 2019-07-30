@@ -61,6 +61,16 @@ print("\n Test Accuracy : %.4f" % (model.evaluate(X_test, Y_test)[1]))
 
 print(history.history.keys())
 
+import matplotlib.pyplot as plt
+
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc = 'upper left')
+plt.show()
+
 # 테스트셋의 오차
 # y_vloss = history.history['val_loss']
 
