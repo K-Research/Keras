@@ -9,8 +9,8 @@ a = np.array(range(1, 101))
 batch_size = 1
 size = 5
 
-history_loss = []
-history_val_loss = []
+history_mse = []
+history_val_mse = []
 
 def split_5(seq, size):
     aaa = []
@@ -41,9 +41,9 @@ y_test = y_train + 100
 
 # 2. 모델 구성
 model = Sequential()
-model.add(LSTM(4, batch_input_shape = (1, 4, 1), stateful = True))
-model.add(Dense(3, activation = 'relu'))
-model.add(Dense(2))
+model.add(LSTM(128, batch_input_shape = (1, 4, 1), stateful = True))
+model.add(Dense(512, activation = 'relu'))
+model.add(Dense(16))
 model.add(Dense(1))
 
 # model.summary()
@@ -62,8 +62,8 @@ early_stopping = EarlyStopping(monitor = 'loss', patience = 100, mode = 'auto')
 for epoch_idx in range(num_epochs):
     print('epochs : ' + str(epoch_idx))
     history = model.fit(x_train, y_train, epochs = 1, batch_size = 1, verbose = 2, shuffle = False, validation_data = (x_test, y_test), callbacks = [early_stopping, tb_hist])
-    history_loss.append(history.history['loss'])
-    history_val_loss.append(history.history['val_loss'])
+    history_mse.append(history.history['mean_squared_error'])
+    history_val_mse.append(history.history['val_mean_squared_error'])
     model.reset_states()
 
 mse, _ = model.evaluate(x_train, y_train, batch_size = 1)
@@ -91,10 +91,10 @@ print("R2 : ", r2_y_predict)
 import matplotlib.pyplot as plt
 
 # 그래프에 그리드를 주고 레이블을 표시
-plt.plot(history_loss)
-plt.plot(history_val_loss)
-plt.title('model loss')
+plt.plot(history_mse)
+plt.plot(history_val_mse)
+plt.title('model mse')
 plt.xlabel('epoch')
-plt.ylabel('loss')
+plt.ylabel('mse')
 plt.legend(['train', 'test'], loc = 'upper left')
 plt.show()
