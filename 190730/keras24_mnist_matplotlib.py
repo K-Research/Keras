@@ -101,7 +101,7 @@ plt.show()
 # plt.plot(x_len, y_vloss, marker = '.', c = "blue", label = 'Trainset_loss')
 
 # 그래프에 그리드를 주고 레이블을 표시
-# plt.legent(loc = 'upper right')
+# plt.legend(loc = 'upper right')
 # plt.axis([0, 20, 0, 0.35])
 # plt.grid()
 # plt.xlabel('epoch')
