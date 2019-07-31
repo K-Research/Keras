@@ -28,9 +28,9 @@ def build_model():
 
 import numpy as np
 
-k = 4
-num_val_samples = len(train_data) // k
-num_epochs = 100
+k = 5
+num_val_samples = len(train_data) // k # 80
+num_epochs = 1
 all_scores = []
 
 for i in range(k):
@@ -47,7 +47,7 @@ for i in range(k):
     model = build_model()
 
     # 모델 훈련 ( verbose = 0 이므로 훈련 과정이 출력되지 않습니다)
-    model.fit(partial_train_data, partial_train_targets, epochs = num_epochs, batch_size = 1, verbose = 1) # verbose = 0
+    model.fit(partial_train_data, partial_train_targets, epochs = num_epochs, batch_size = 1, verbose = 0) # verbose = 0
 
     # 검증 세트로 모델 평가
     val_mse, val_mae = model.evaluate(val_data, val_targets, verbose = 0)
