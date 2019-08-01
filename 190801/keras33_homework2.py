@@ -37,15 +37,15 @@ import numpy as np
 def build_network(keep_prob = 0.5, optimizer = 'adam'):
     inputs = Input(shape = (28, 28, 1), name = 'input')
     x = Conv2D(8, kernel_size = (3, 3), activation = 'relu', name = 'hidden1')(inputs)
-    x = Dropout(keep_prob)(x)
+    x = Dropout(0.2)(x)
     x1 = Conv2D(4, kernel_size = (3, 3), activation = 'relu', name = 'hidden2')(x)
-    x1 = Dropout(keep_prob)(x1)
+    x1 = Dropout(0.2)(x1)
     x2 = Conv2D(2, kernel_size = (3, 3), activation = 'relu', name = 'hidden3')(x1)
-    x2 = Dropout(keep_prob)(x2)
+    x2 = Dropout(0.2)(x2)
     x2 = Flatten()(x2)
     prediction = Dense(10, activation = 'softmax', name = 'output')(x2)
     model = Model(inputs = inputs, outputs = prediction)
-    model.compile(optimizer = optimizer, loss = 'categorical_crossentropy', metrics = ['accuracy'])
+    model.compile(optimizer = 'adadelta', loss = 'categorical_crossentropy', metrics = ['accuracy'])
     return model
 
 def create_hyperparameters():
@@ -58,11 +58,13 @@ from keras.wrappers.scikit_learn import KerasClassifier # 사이킷런과 호환
 # from keras wrappers.scikit_learn import KerasRegressor # 사이킷런과 호환하도록 함.
 model = KerasClassifier(build_fn = build_network, verbose = 1) # verbose = 0
 
-hyperparameters = create_hyperparameters()
+model.fit(X_train, Y_train, batch_size = 30)
 
-from sklearn.model_selection import RandomizedSearchCV
-search = RandomizedSearchCV(estimator = model, param_distributions = hyperparameters, n_iter = 10, n_jobs = 1, cv = 3, verbose = 1) # 작업 10회 수행, 3겹 교차검증 사용
-#search.fit(data["X_train"], data["Y_train"])
-search.fit(X_train, Y_train)
+# hyperparameters = create_hyperparameters()
 
-print(search.best_params_)
+# from sklearn.model_selection import RandomizedSearchCV
+# search = RandomizedSearchCV(estimator = model, param_distributions = hyperparameters, n_iter = 10, n_jobs = 1, cv = 3, verbose = 1) # 작업 10회 수행, 3겹 교차검증 사용
+# #search.fit(data["X_train"], data["Y_train"])
+# search.fit(X_train, Y_train)
+
+# print(search.best_params_)
