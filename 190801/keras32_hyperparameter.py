@@ -19,7 +19,7 @@ def create_hyperparameters():
     batches = [10, 20, 30, 40, 50]
     optimizers = ['rmsprop', 'adam', 'adadelta']
     dropout = np.linspace(0.1, 0.5, 5)
-    return("batch_size" : batches, "optimizer" : optimizers, "keep_prob" : dropout)
+    return{"batch_size" : batches, "optimizer" : optimizers, "keep_prob" : dropout}
 
 from keras.wrappers.scikit_learn import KerasClassifier # 사이킷런과 호환하도록 함.
 # from keras wrappers.scikit_learn import KerasRegressor # 사이킷런과 호환하도록 함.
@@ -28,7 +28,7 @@ model = KerasClassifier(build_fn = build_network, verbose = 1) # verbose = 0
 hyperparameters = create_hyperparameters()
 
 from sklearn.model_selection import RandomizedSearchCV
-search = RandomizedSearchCV(estimator = model, param_distributions = hyperparameters, n_iter = 10, n_job = 1, cv = 3, verbose = 1) # 작업 10회 수행, 3겹 교차검증 사용
+search = RandomizedSearchCV(estimator = model, param_distributions = hyperparameters, n_iter = 10, n_jobs = 1, cv = 3, verbose = 1) # 작업 10회 수행, 3겹 교차검증 사용
 #search.fit(data["X_train"], data["Y_train"])
 search.fit(X_train, Y_train)
 
