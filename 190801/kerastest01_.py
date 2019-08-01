@@ -25,33 +25,33 @@ x_train_exchange = dataset_exchange[0 : 480]
 x_test_exchange = dataset_exchange[480 : 600]
 
 x_train_market = x_train_market.values.reshape(x_train_market.shape[0], x_train_market.shape[1])
-x_train_high = x_train_market.reshape(x_train_high.shape[0], x_train_high.shape[1])
-x_train_low = x_train_market.reshape(x_train_low.shape[0], x_train_low.shape[1])
-x_train_volume = x_train_market.reshape(x_train_volume.shape[0], x_train_volume.shape[1])
-x_train_exchange = x_train_market.reshape(x_train_exchange.shape[0], x_train_exchange.shape[1])
+x_train_high = x_train_high.values.reshape(x_train_high.shape[0], x_train_high.shape[1])
+x_train_low = x_train_low.values.reshape(x_train_low.shape[0], x_train_low.shape[1])
+x_train_volume = x_train_volume.values.reshape(x_train_volume.shape[0], x_train_volume.shape[1])
+x_train_exchange = x_train_exchange.values.reshape(x_train_exchange.shape[0], x_train_exchange.shape[1])
 
-# x_train = numpy.concatenate((x_train_market, x_train_high, x_train_low, x_train_volume, x_train_exchange), axis = 1)
-x_train = numpy.concatenate((x_train_market, x_train_high, x_train_low), axis = 1)
+# scaler = MinMaxScaler()
+scaler = StandardScaler()
+scaler.fit(x_train_market)
+x_train_market = scaler.transform(x_train_market)
+x_train_high = scaler.transform(x_train_high)
+x_train_low = scaler.transform(x_train_low)
+x_train_volume = scaler.transform(x_train_volume)
+x_train_exchange = scaler.transform(x_train_exchange)
 
-scaler = MinMaxScaler()
-# scaler = StandardScaler()
-scaler.fit(x_train)
-x_train = scaler.transform(x_train)
+x_train = numpy.concatenate((x_train_market, x_train_high, x_train_low, x_train_volume, x_train_exchange), axis = 1)
 
-x_train = x_train.reshape(480, 3, 1)
+x_train = x_train.reshape(480, 5, 1)
 
 y_train = dataset_closing[0 : 480]
 y_test = dataset_closing[480 : 600]
 
-# x_input = array([2026.10, 2032.23, 2009.33, 284936, 1187.80])
-x_input = array([2026.10, 2032.23, 2009.33])
-x_input = x_input.reshape(1, 3, 1)
+x_input = array([2026.10, 2032.23, 2009.33, 284936, 1187.80])
+x_input = x_input.reshape(1, 5, 1)
 
 model = Sequential()
 model.add(LSTM(input_dim = 1, output_dim = 50, return_sequences = True))
-model.add(Dropout(0.2))
 model.add(LSTM(100, return_sequences = False))
-model.add(Dropout(0.2))
 model.add(Dense(output_dim = 1))
 model.add(Activation('linear'))
 
