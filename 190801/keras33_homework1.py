@@ -18,8 +18,8 @@ import tensorflow as tf
 
 # 데이터 불러오기
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
-X_train = X_train.reshape(X_train.shape[0], 28 * 28).astype('float32') / 255 # X_train.shape[0] : 60000
-X_test = X_test.reshape(X_test.shape[0], 28 * 28).astype('float32') / 255
+X_train = X_train.reshape(X_train.shape[0], 28, 28, 1).astype('float32') / 255 # X_train.shape[0] : 60000
+X_test = X_test.reshape(X_test.shape[0], 28, 28, 1).astype('float32') / 255
 
 # print(Y_train.shape)
 # print(Y_test.shape)
@@ -31,17 +31,18 @@ Y_test = np_utils.to_categorical(Y_test)
 # print(X_test.shape)
 
 from keras.models import Sequential, Model
-from keras.layers import Dense, LSTM, Dropout, Input
+from keras.layers import Dense, LSTM, Dropout, Input, Conv2D, Flatten
 import numpy as np
 
 def build_network(keep_prob = 0.5, optimizer = 'adam'):
-    inputs = Input(shape = (784, ), name = 'input')
-    x = Dense(512, activation = 'relu', name = 'hidden1')(inputs)
-    x = Dropout(keep_prob)()
-    x = Dense(256, activation = 'relu', name = 'hidden2')(inputs)
+    inputs = Input(shape = (28, 28, 1), name = 'input')
+    x = Conv2D(8, kernel_size = (3, 3), activation = 'relu', name = 'hidden1')(inputs)
     x = Dropout(keep_prob)(x)
-    x = Dense(128, activation = 'relu', name = 'hidden3')(inputs)
-    x = Dropout(keep_prob)(x)
+    x1 = Conv2D(4, kernel_size = (3, 3), activation = 'relu', name = 'hidden2')(x)
+    x1 = Dropout(keep_prob)(x1)
+    x2 = Conv2D(2, kernel_size = (3, 3), activation = 'relu', name = 'hidden3')(x1)
+    x2 = Dropout(keep_prob)(x2)
+    x2 = Flatten()(x2)
     prediction = Dense(10, activation = 'softmax', name = 'output')(x2)
     model = Model(inputs = inputs, outputs = prediction)
     model.compile(optimizer = optimizer, loss = 'categorical_crossentropy', metrics = ['accuracy'])
