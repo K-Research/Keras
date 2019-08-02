@@ -44,7 +44,6 @@ y_train = dataset_closing
 x_input = array([2026.10, 2032.23, 2009.33, 284936, 1187.80])
 x_input = x_input.reshape(1, 5, 1)
 
-#2단계: 모델 생성
 model = Sequential()
 
 model.add(LSTM(input_dim = 1, output_dim = 50, return_sequences = True))
