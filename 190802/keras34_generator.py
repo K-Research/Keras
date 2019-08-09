@@ -45,7 +45,7 @@ print(Y_train.shape)
 early_stopping_callback = EarlyStopping(monitor = 'val_loss', patience = 10)
 
 # 모델의 실행
-# history =model.fit(X_train, Y_train, validation_data = (X_test, Y_test), epochs = 30, batch_size = 200, verbose = 1, verbose = 30, callbacks = [early_stopping_callback], checkpointer)
+# history = model.fit(X_train, Y_train, validation_data = (X_test, Y_test), epochs = 30, batch_size = 200, verbose = 1, verbose = 30, callbacks = [early_stopping_callback], checkpointer)
 # history = model.fit(X_train, Y_train, epochs = 12, validation_data = (X_test, Y_test), batch_size = 1, verbose = 1, callbacks = [early_stopping_callback])
 
 # 테스트 정확도 출력

@@ -5,6 +5,7 @@ from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Conv2D, MaxPooling2D
 from keras.optimizers import SGD, Adam, RMSprop
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 
 # CIFAR_10은 3채널로 구성된 32x32 이미지 60000장을 갖는다.
 IMG_CHANNELS = 3
@@ -21,6 +22,7 @@ OPTIM = RMSprop()
 
 # 데이터셋 불러오기
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
+
 print('X_train shape : ', X_train.shape)
 print(X_train.shape[0], 'train samples')
 print(X_test.shape[0], 'test samples')
@@ -35,36 +37,36 @@ X_test = X_test.astype('float32')
 X_train /= 255
 X_test /= 255
 
-# X_train = X_train.flatten()
-# X_test = X_test.flatten()
-# X_train = X_train.reshape(X_train.shape[0], 1)
-# X_test = X_test.reshape(X_test.shape[0], 1)
+X_train = X_train.flatten()
+X_test = X_test.flatten()
+X_train = X_train.reshape(X_train.shape[0], 1)
+X_test = X_test.reshape(X_test.shape[0], 1)
 
-# from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
-# scaler = MinMaxScaler()
-# # scaler = StandardScaler()
-# scaler.fit(X_train)
-# scaler.fit(X_test)
-# X_train = scaler.transform(X_train)
-# X_test = scaler.transform(X_test)
+scaler = MinMaxScaler()
+# scaler = StandardScaler()
+scaler.fit(X_train)
+scaler.fit(X_test)
+X_train = scaler.transform(X_train)
+X_test = scaler.transform(X_test)
 
-# X_train = X_train.flatten()
-# X_test = X_test.flatten()
+X_train = X_train.flatten()
+X_test = X_test.flatten()
 
-# X_train = X_train.reshape(-1, 3)
-# X_test = X_train.reshape(-1, 3)
+X_train = X_train.reshape(-1, 3)
+X_test = X_test.reshape(-1, 3)
 
-# X_train = X_train.reshape(-1, 32, 3)
-# X_test = X_train.reshape(-1, 32, 3)
+X_train = X_train.reshape(-1, 32, 3)
+X_test = X_test.reshape(-1, 32, 3)
 
-# X_train = X_train.reshape(-1, 32, 32, 3)
-# X_test = X_train.reshape(-1, 32, 32, 3)
+X_train = X_train.reshape(-1, 32, 32, 3)
+X_test = X_test.reshape(-1, 32, 32, 3)
 
-# print(X_train.shape)
-# print(X_test.shape)
-# print(Y_train.shape)
-# print(Y_test.shape)
+print(X_train.shape)
+print(X_test.shape)
+print(Y_train.shape)
+print(Y_test.shape)
 
 # 신경망 정의
 model = Sequential()
